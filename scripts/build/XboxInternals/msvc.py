@@ -22,7 +22,7 @@ os.chdir(libDir)
 buildConfigs = {
     "DebugLib": {},
     "DebugDll": {},
-    #"ReleaseLib": {},
+    "ReleaseLib": {},
     "ReleaseLibMT": {},
     "ReleaseDll": {}
 }
