@@ -38,6 +38,8 @@ for configName, config in buildConfigs.items():
     os.chdir(libDir)
 
     # Upgrade solution and projects
+    # Disabled because there's no real need for this; however, it might be useful for future versions of VC++.
+    '''
     returnCode = subprocess.check_call([
             "devenv",
             os.path.join(libDir, "{0}.sln".format(configName)),
@@ -47,6 +49,7 @@ for configName, config in buildConfigs.items():
 
     if returnCode != 0:
         print("Configuring \"{0}\" failed (exit code {1}).".format(configName, returnCode))
+    '''
 
 # Build each config
 # This runs builds in parallel to speed things up
