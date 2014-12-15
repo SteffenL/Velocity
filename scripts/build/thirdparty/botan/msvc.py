@@ -17,39 +17,45 @@ class BuildProcessDetails:
 
 scriptDir = os.path.split(os.path.abspath(__file__))[0]
 libDir = os.path.realpath(os.path.join(scriptDir, os.path.join("../../../../thirdparty/{0}".format(libName))))
-buildOutputRootDir = os.path.realpath(os.path.join(libDir, "bin"))
+buildOutputRootDir = os.path.realpath(os.path.join(libDir, "out"))
 os.chdir(libDir)
 
 # The build configurations
 buildConfigs = {
-    "DebugLib": {
-        "botan": ["--disable-shared", "--enable-debug"],
-        "compiler": {
-            "cxx": ""
-        }
-    },
-    "DebugDll": {
+    "debug_shared": {
         "botan": ["--enable-shared", "--enable-debug"],
         "compiler": {
             "cxx": ""
         }
     },
-    "ReleaseLib": {
-        "botan": ["--disable-shared", "--disable-debug"],
+    "debug_static_md": {
+        "botan": ["--disable-shared", "--enable-debug"],
         "compiler": {
             "cxx": ""
         }
     },
-    "ReleaseLibMT": {
-        "botan": ["--disable-shared", "--disable-debug"],
+    "debug_static_mt": {
+        "botan": ["--disable-shared", "--enable-debug"],
         "compiler": {
-            "cxx": "cl /MT"
+            "cxx": "cl /MTd"
         }
     },
-    "ReleaseDll": {
+    "release_static": {
         "botan": ["--enable-shared", "--disable-debug"],
         "compiler": {
             "cxx": ""
+        }
+    },
+    "release_static_md": {
+        "botan": ["--disable-shared", "--disable-debug"],
+        "compiler": {
+            "cxx": ""
+        }
+    },
+    "release_static_mt": {
+        "botan": ["--disable-shared", "--disable-debug"],
+        "compiler": {
+            "cxx": "cl /MT"
         }
     }
 }
@@ -121,7 +127,7 @@ while len(buildJobQueue) > 0 or len(activeBuilds) > 0:
     os.chdir(outputDir)
 
     newBuild = BuildProcessDetails(configName)
-    newBuild.logFilePath = os.path.join(outputDir, "build.log")
+    newBuild.logFilePath = os.path.join(outputDir, "build.{0}.log".format(configName))
     newBuild.logFile = codecs.open(newBuild.logFilePath, "w+", encoding="utf-8")
     newBuild.process = subprocess.Popen(["nmake", "/NOLOGO"], stdout=newBuild.logFile)
     activeBuilds.add(newBuild)

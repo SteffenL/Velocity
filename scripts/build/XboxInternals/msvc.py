@@ -20,11 +20,12 @@ os.chdir(libDir)
 
 # The build configurations
 buildConfigs = {
-    "DebugLib": {},
-    "DebugDll": {},
-    "ReleaseLib": {},
-    "ReleaseLibMT": {},
-    "ReleaseDll": {}
+    "debug_shared": {},
+    "debug_static_md": {},
+    "debug_static_mt": {},
+    "release_shared": {},
+    "release_static_md": {},
+    "release_static_mt": {}
 }
 
 # Clean the repository
@@ -85,7 +86,7 @@ while len(buildJobQueue) > 0 or len(activeBuilds) > 0:
     os.chdir(libDir)
 
     newBuild = BuildProcessDetails(configName)
-    newBuild.logFilePath = os.path.join(libDir, "build.log")
+    newBuild.logFilePath = os.path.join(libDir, "build.{0}.log".format(configName))
     newBuild.logFile = codecs.open(newBuild.logFilePath, "w+", encoding="utf-8")
     newBuild.process = subprocess.Popen([
             "msbuild",
