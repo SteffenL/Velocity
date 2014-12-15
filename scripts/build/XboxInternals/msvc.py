@@ -4,7 +4,7 @@
 # Name of the library to build (must match directory- and file names)
 libName = "XboxInternals"
 
-import os, subprocess, re, codecs, multiprocessing, time
+import os, subprocess, re, codecs, multiprocessing, time, argparse
 from collections import deque
 
 class BuildProcessDetails:
@@ -13,6 +13,12 @@ class BuildProcessDetails:
         self.process = None
         self.logFile = None
         self.logFilePath = ""
+
+# Parse command line
+argParser = argparse.ArgumentParser()
+argParser.add_argument("--platform-toolset", default="v110_xp", help="VC++ platform toolset, e.g. v110, v110_xp, etc.")
+args = argParser.parse_args()
+
 
 scriptDir = os.path.split(os.path.abspath(__file__))[0]
 libDir = os.path.realpath(os.path.join(scriptDir, os.path.join("../../../{0}".format(libName))))
@@ -91,7 +97,7 @@ while len(buildJobQueue) > 0 or len(activeBuilds) > 0:
     newBuild.process = subprocess.Popen([
             "msbuild",
             os.path.join(libDir, "{0}.sln".format(libName)),
-            "/nologo", "/t:Rebuild", "/p:Configuration={0}".format(configName)
+            "/nologo", "/t:Rebuild", "/p:Configuration={0};PlatformToolset={1}".format(configName, args.platform_toolset)
         ], stdout=newBuild.logFile)
     activeBuilds.add(newBuild)
 
