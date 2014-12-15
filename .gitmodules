@@ -1,0 +1,4 @@
+[submodule "thirdparty/botan"]
+	path = thirdparty/botan
+	url = https://github.com/randombit/botan.git
+	ignore = dirty

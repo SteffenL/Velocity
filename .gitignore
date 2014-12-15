@@ -194,3 +194,7 @@ Desktop.ini
 $RECYCLE.BIN/
 
 fixqt4headers
+
+
+# Scripts used for automating builds
+!/scripts/build
