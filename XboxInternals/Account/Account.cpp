@@ -1,5 +1,11 @@
 #include "Account.h"
 
+// botan
+#include <botan/botan.h>
+#include <botan/sha160.h>
+#include <botan/hmac.h>
+#include <botan/arc4.h>
+
 Account::Account(std::string path, bool decrypt, ConsoleType type) : ioPassedIn(false),
     decrypt(decrypt), path(path), type(type)
 {

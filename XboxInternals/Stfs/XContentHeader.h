@@ -11,14 +11,6 @@
 
 #include <iostream>
 
-#include <botan/botan.h>
-#include <botan/pubkey.h>
-#include <botan/rsa.h>
-#include <botan/emsa.h>
-#include <botan/sha160.h>
-#include <botan/emsa3.h>
-#include <botan/look_pk.h>
-
 #include "XboxInternals_global.h"
 
 using std::string;

@@ -1,5 +1,8 @@
 #include "Svod.h"
 
+#include "botan/botan.h"
+#include "botan/sha160.h"
+
 SVOD::SVOD(string rootPath)
 {
     // make sure all of the slashes are the same

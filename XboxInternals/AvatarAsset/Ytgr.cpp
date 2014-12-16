@@ -1,5 +1,8 @@
 #include "Ytgr.h"
 
+#include <botan/botan.h>
+#include <botan/sha160.h>
+
 Ytgr::Ytgr(std::string filePath) : ioPassedIn(false)
 {
     io = new FileIO(filePath);
