@@ -9,7 +9,7 @@
 #include <botan/emsa3.h>
 #include <botan/look_pk.h>
 
-#include <stdio.h>
+#include <cstdio>
 
 StfsPackage::StfsPackage(BaseIO *io, DWORD flags) :
     metaData(NULL), io(io), ioPassedIn(true), flags(flags)

@@ -5,7 +5,7 @@
 #include "XdbfHelpers.h"
 #include "GpdBase.h"
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 
 #include "XboxInternals_global.h"
 

@@ -1,5 +1,5 @@
 #include "Xdbf.h"
-#include <stdio.h>
+#include <cstdio>
 
 Xdbf::Xdbf(string gpdPath) : ioPassedIn(false)
 {

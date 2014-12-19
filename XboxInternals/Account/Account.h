@@ -2,7 +2,7 @@
 
 // other
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include "IO/FileIO.h"
 #include "Account/AccountDefinitions.h"
 #include "Gpd/XdbfDefininitions.h"
