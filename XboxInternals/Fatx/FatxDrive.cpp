@@ -15,6 +15,9 @@
 #include <unistd.h>
 #endif
 
+#include <iomanip>
+#include <codecvt>
+
 FatxDrive::FatxDrive(std::string drivePath, FatxDriveType type)  : type(type)
 {
     // convert it to a wstring
@@ -797,7 +800,11 @@ void FatxDrive::loadFatxDrive(std::wstring drivePath)
         std::stringstream ss;
         for (int i = 0; i < 3; i++)
         {
-            ss << "F:/Xbox360/Data000" << i;
+            // TODO: either remove this method, or make it more reliable and support more platforms than Windows; it seems to be old and forgotten code.
+            // Compare this with the code in FatxDriveDetection.
+            // Also, I don't quite see the idea with passing in wide string and then naively making it narrow.
+            const std::string& narrowDrivePath = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(drivePath);
+            ss << narrowDrivePath << "/Xbox360/Data" << std::setw(4) << std::setfill('0') << i;
             dataFiles.push_back(ss.str());
             ss.str(std::string());
         }
