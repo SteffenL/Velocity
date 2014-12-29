@@ -879,7 +879,7 @@ void FatxDrive::loadFatxDrive()
             throw std::string("FATX: Device contains invalid configuration data.\n");
 
         // set this so the next check fails
-        lastFormatRecoveryVersion.major = 0;
+        lastFormatRecoveryVersion = { 0 };
     }
 
     // Eaton determined this was a version struct and figured out the minimum version
