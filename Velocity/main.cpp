@@ -17,8 +17,6 @@ int main(int argc, char *argv[])
     for (int i = 1; i < argc; i++)
         args.append(QUrl("file:///" + QString::fromLatin1(argv[i]).replace("\\", "/")));
 
-    Botan::LibraryInitializer init;
-
     MainWindow w(args);
     w.show();
 

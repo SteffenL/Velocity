@@ -4,13 +4,11 @@
 #include <botan/botan.h>
 #include <botan/sha160.h>
 #include <botan/hmac.h>
-#include <botan/arc4.h>
+#include <botan/rc4.h>
 
 Account::Account(std::string path, bool decrypt, ConsoleType type) : ioPassedIn(false),
     decrypt(decrypt), path(path), type(type)
 {
-    Botan::LibraryInitializer init;
-
     if (decrypt)
     {
         decryptAccount(path, &outPath, type);
@@ -232,7 +230,7 @@ void Account::decryptAccount(std::string encryptedPath, std::string *outPath, Co
     encIo.ReadBytes(restOfFile, 0x184);
 
     // decrypt using rc4
-    Botan::ARC4 rc4;
+    Botan::RC4 rc4;
     rc4.set_key(rc4Key, 0x10);
 
     rc4.cipher(restOfFile, restOfFile, 0x184);
@@ -333,7 +331,7 @@ void Account::encryptAccount(std::string decryptedPath, ConsoleType type, std::s
     hmacSha1.final(rc4Key);
 
     // encrypt the data
-    Botan::ARC4 rc4;
+    Botan::RC4 rc4;
     rc4.set_key(rc4Key, 0x10);
 
     rc4.cipher1(decryptedData, 0x184);
